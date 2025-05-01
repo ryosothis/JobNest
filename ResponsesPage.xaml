@@ -1,0 +1,180 @@
+﻿<Page x:Class="JobNest.ResponsesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Title="JobNest - Мои отклики"
+      Background="#F5F5F5"
+      Loaded="Page_Loaded">
+
+    <Page.Resources>
+        <Style x:Key="MenuTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Foreground" Value="#E1F5FE"/>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" 
+                                               To="1.1" Duration="0:0:0.2"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" 
+                                               To="1.1" Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" 
+                                               To="1.0" Duration="0:0:0.2"/>
+                                <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" 
+                                               To="1.0" Duration="0:0:0.2"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="ProfileSection" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="ProfileTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="Foreground" Value="#333333"/>
+        </Style>
+
+        <Style x:Key="ResponseCard" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="15"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="5" ShadowDepth="1" Opacity="0.1"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="VacancyTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#333333"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <Style x:Key="EmployerName" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#81D4FA"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="TextDecorations" Value="Underline"/>
+        </Style>
+
+        <Style x:Key="ResponseDate" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+        </Style>
+
+        <Style x:Key="MessageText" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#444444"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="Margin" Value="0,10,0,0"/>
+        </Style>
+
+        <Style x:Key="BackButton" TargetType="Button">
+            <Setter Property="Background" Value="#81D4FA"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="HorizontalAlignment" Value="Left"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Height" Value="36"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <DockPanel Background="#81D4FA" Height="50" VerticalAlignment="Top">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                <Border Background="#81D4FA" Width="32" Height="32" CornerRadius="4">
+                    <Image Source="/logo.png" Width="24" Height="24" Stretch="Uniform" Margin="0,0,5,0"/>
+                </Border>
+                <TextBlock Text="JobNest" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <TextBlock Text="Главная" Style="{StaticResource MenuTextBlockStyle}" 
+                           MouseLeftButtonDown="NavigateToMainPage"/>
+                <TextBlock Text="Поиск работы" Style="{StaticResource MenuTextBlockStyle}" 
+                           MouseLeftButtonDown="NavigateToVacanciesPage"/>
+                <TextBlock Text="Контакты" Style="{StaticResource MenuTextBlockStyle}" 
+                           MouseLeftButtonDown="NavigateToContactPage"/>
+
+                <StackPanel Orientation="Horizontal" Cursor="Hand" 
+                            MouseLeftButtonDown="NavigateToProfilePage">
+                    <Image Source="/user_iconn.png" Width="32" Height="32" Margin="5,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+
+        <ScrollViewer Padding="0,50,0,0" VerticalScrollBarVisibility="Auto">
+            <Grid Margin="20,10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Button Content="Назад" Style="{StaticResource BackButton}" Click="BackButton_Click" Grid.Row="0"/>
+
+                <Border Style="{StaticResource ProfileSection}" Grid.Row="1">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="Мои отклики" Style="{StaticResource ProfileTitle}" Grid.Row="0"/>
+
+                        <ScrollViewer VerticalScrollBarVisibility="Auto" Grid.Row="1" Margin="0,10,0,0">
+                            <StackPanel x:Name="ResponsesContainer">
+                                <!-- Здесь будут динамически добавляться отклики -->
+                            </StackPanel>
+                        </ScrollViewer>
+
+                        <TextBlock x:Name="NoResponsesText" Text="У вас пока нет откликов" 
+                                   Style="{StaticResource ProfileTitle}" HorizontalAlignment="Center"
+                                   Visibility="Collapsed" Margin="0,20" Grid.Row="2"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </ScrollViewer>
+    </Grid>
+</Page>

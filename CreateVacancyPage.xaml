@@ -1,0 +1,197 @@
+﻿<Page x:Class="JobNest.CreateVacancyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Title="JobNest - Создание вакансии"
+      Background="#F5F5F5">
+
+    <Page.Resources>
+        <Style x:Key="MenuTextBlockStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="Margin" Value="10,0"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="RenderTransformOrigin" Value="0.5,0.5"/>
+            <Setter Property="RenderTransform">
+                <Setter.Value>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <EventTrigger RoutedEvent="MouseEnter">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.2" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.2" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="MouseLeave">
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleX" To="1.0" Duration="0:0:0.2"/>
+                            <DoubleAnimation Storyboard.TargetProperty="RenderTransform.ScaleY" To="1.0" Duration="0:0:0.2"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="VacancySection" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="VacancyTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="24"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,20"/>
+        </Style>
+
+        <Style x:Key="VacancyLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="Margin" Value="0,10,0,5"/>
+        </Style>
+
+        <Style x:Key="VacancyTextBox" TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="VacancyComboBox" TargetType="ComboBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,10"/>
+            <Setter Property="Padding" Value="5"/>
+            <Setter Property="BorderBrush" Value="#CCCCCC"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+
+        <Style x:Key="CreateButton" TargetType="Button">
+            <Setter Property="Background" Value="#4CAF50"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="10,5"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="0,20,0,0"/>
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
+
+        <Style x:Key="CancelButton" TargetType="Button" BasedOn="{StaticResource CreateButton}">
+            <Setter Property="Background" Value="#F44336"/>
+            <Setter Property="Margin" Value="10,20,0,0"/>
+        </Style>
+
+        <Style x:Key="ValidationError" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,-5,0,5"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <DockPanel Background="#81D4FA" Height="50" VerticalAlignment="Top">
+            <StackPanel DockPanel.Dock="Left" Orientation="Horizontal" VerticalAlignment="Center" Margin="10,0,0,0">
+                <Border Background="#81D4FA" Width="32" Height="32" CornerRadius="4">
+                    <Image Source="/logo.png" Width="24" Height="24" Stretch="Uniform" Margin="0,0,5,0"/>
+                </Border>
+                <TextBlock Text="JobNest" FontSize="20" FontWeight="Bold" Foreground="White" VerticalAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,0,10,0">
+                <TextBlock Text="Главная" Style="{StaticResource MenuTextBlockStyle}" Cursor="Hand" MouseLeftButtonDown="NavigateToMainPage"/>
+                <TextBlock Text="Поиск работы" Style="{StaticResource MenuTextBlockStyle}" Cursor="Hand" MouseLeftButtonDown="NavigateToVacanciesPage"/>
+                <TextBlock Text="Контакты" Style="{StaticResource MenuTextBlockStyle}" Cursor="Hand" MouseLeftButtonDown="NavigateToContactPage"/>
+
+                <StackPanel Orientation="Horizontal" Cursor="Hand" MouseLeftButtonDown="NavigateToProfilePage">
+                    <Image Source="/user_iconn.png" Width="32" Height="32" Margin="5,0,0,0"/>
+                </StackPanel>
+            </StackPanel>
+        </DockPanel>
+
+        <ScrollViewer Padding="0,50,0,0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Margin="10">
+                <Border Style="{StaticResource VacancySection}">
+                    <StackPanel>
+                        <TextBlock Text="Создание вакансии" Style="{StaticResource VacancyTitle}"/>
+
+                        <TextBlock Text="Название вакансии*" Style="{StaticResource VacancyLabel}"/>
+                        <TextBox x:Name="TitleTextBox" Style="{StaticResource VacancyTextBox}" MaxLength="50"/>
+                        <TextBlock x:Name="TitleError" Style="{StaticResource ValidationError}" Visibility="Collapsed"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock Text="Регион*" Style="{StaticResource VacancyLabel}"/>
+                                <ComboBox x:Name="RegionComboBox" Style="{StaticResource VacancyComboBox}"/>
+                                <TextBlock x:Name="RegionError" Style="{StaticResource ValidationError}" Visibility="Collapsed"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock Text="График работы*" Style="{StaticResource VacancyLabel}"/>
+                                <ComboBox x:Name="ScheduleComboBox" Style="{StaticResource VacancyComboBox}"/>
+                                <TextBlock x:Name="ScheduleError" Style="{StaticResource ValidationError}" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="Зарплата (руб.)*" Style="{StaticResource VacancyLabel}"/>
+                        <TextBox x:Name="SalaryTextBox" Style="{StaticResource VacancyTextBox}" PreviewTextInput="NumberValidationTextBox"/>
+                        <TextBlock x:Name="SalaryError" Style="{StaticResource ValidationError}" Visibility="Collapsed"/>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                                <TextBlock Text="Требуемое образование*" Style="{StaticResource VacancyLabel}"/>
+                                <ComboBox x:Name="EducationComboBox" Style="{StaticResource VacancyComboBox}"/>
+                                <TextBlock x:Name="EducationError" Style="{StaticResource ValidationError}" Visibility="Collapsed"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Column="1" Margin="10,0,0,0">
+                                <TextBlock Text="Требуемый опыт*" Style="{StaticResource VacancyLabel}"/>
+                                <ComboBox x:Name="ExperienceComboBox" Style="{StaticResource VacancyComboBox}"/>
+                                <TextBlock x:Name="ExperienceError" Style="{StaticResource ValidationError}" Visibility="Collapsed"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <TextBlock Text="Описание вакансии*" Style="{StaticResource VacancyLabel}"/>
+                        <TextBox x:Name="DescriptionTextBox" Style="{StaticResource VacancyTextBox}" 
+                                 AcceptsReturn="True" TextWrapping="Wrap" MinHeight="150" 
+                                 VerticalScrollBarVisibility="Auto"/>
+                        <TextBlock x:Name="DescriptionError" Style="{StaticResource ValidationError}" Visibility="Collapsed"/>
+
+                        <TextBlock Text="Требования к кандидату*" Style="{StaticResource VacancyLabel}"/>
+                        <TextBox x:Name="RequirementsTextBox" Style="{StaticResource VacancyTextBox}" 
+                                 AcceptsReturn="True" TextWrapping="Wrap" MinHeight="150" 
+                                 VerticalScrollBarVisibility="Auto"/>
+                        <TextBlock x:Name="RequirementsError" Style="{StaticResource ValidationError}" Visibility="Collapsed"/>
+
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Отменить" Style="{StaticResource CancelButton}" Click="CancelButton_Click"/>
+                            <Button Content="Создать" Style="{StaticResource CreateButton}" Click="SubmitButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>

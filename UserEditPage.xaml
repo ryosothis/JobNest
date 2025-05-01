@@ -1,0 +1,148 @@
+﻿<Page x:Class="JobNest.UserEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:JobNest"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UserEditPage"
+      Background="#F5F5F5">
+
+    <Page.Resources>
+        <Style x:Key="EditSection" TargetType="Border">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="CornerRadius" Value="8"/>
+            <Setter Property="Padding" Value="20"/>
+            <Setter Property="Margin" Value="20"/>
+            <Setter Property="Effect">
+                <Setter.Value>
+                    <DropShadowEffect BlurRadius="10" ShadowDepth="2" Opacity="0.2"/>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="EditTitle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="22"/>
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Margin" Value="0,0,0,15"/>
+            <Setter Property="Foreground" Value="#333333"/>
+        </Style>
+
+        <Style x:Key="EditLabel" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Foreground" Value="#666666"/>
+            <Setter Property="Margin" Value="0,8,0,3"/>
+        </Style>
+
+        <Style x:Key="EditTextBox" TargetType="TextBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style x:Key="PasswordBox" TargetType="PasswordBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style x:Key="EditComboBox" TargetType="ComboBox">
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Margin" Value="0,0,0,8"/>
+            <Setter Property="Padding" Value="8"/>
+            <Setter Property="BorderBrush" Value="#DDDDDD"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Background" Value="White"/>
+        </Style>
+
+        <Style x:Key="EditButton" TargetType="Button">
+            <Setter Property="Background" Value="#81D4FA"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Padding" Value="12,6"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="MinWidth" Value="120"/>
+            <Setter Property="Height" Value="36"/>
+        </Style>
+
+        <Style x:Key="ErrorText" TargetType="TextBlock">
+            <Setter Property="Foreground" Value="Red"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Margin" Value="0,0,0,5"/>
+            <Setter Property="Visibility" Value="Collapsed"/>
+        </Style>
+    </Page.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Border Style="{StaticResource EditSection}">
+                <StackPanel>
+                    <TextBlock Text="{Binding Title}" Style="{StaticResource EditTitle}"/>
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0" Margin="0,0,10,0">
+                            <TextBlock Text="Имя" Style="{StaticResource EditLabel}"/>
+                            <TextBox x:Name="txtName" Style="{StaticResource EditTextBox}"/>
+                            <TextBlock x:Name="lblNameError" Style="{StaticResource ErrorText}"/>
+
+                            <TextBlock Text="Фамилия" Style="{StaticResource EditLabel}"/>
+                            <TextBox x:Name="txtLastName" Style="{StaticResource EditTextBox}"/>
+                            <TextBlock x:Name="lblLastNameError" Style="{StaticResource ErrorText}"/>
+
+                            <TextBlock Text="Email" Style="{StaticResource EditLabel}"/>
+                            <TextBox x:Name="txtEmail" Style="{StaticResource EditTextBox}"/>
+                            <TextBlock x:Name="lblEmailError" Style="{StaticResource ErrorText}"/>
+
+                            <TextBlock Text="Пароль" Style="{StaticResource EditLabel}"/>
+                            <PasswordBox x:Name="txtPassword" Style="{StaticResource PasswordBox}"/>
+                            <TextBlock x:Name="lblPasswordError" Style="{StaticResource ErrorText}"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <TextBlock Text="Подтверждение пароля" Style="{StaticResource EditLabel}"/>
+                            <PasswordBox x:Name="txtConfirmPassword" Style="{StaticResource PasswordBox}"/>
+                            <TextBlock x:Name="lblConfirmPasswordError" Style="{StaticResource ErrorText}"/>
+                            
+                            <TextBlock Text="Логин" Style="{StaticResource EditLabel}"/>
+                            <TextBox x:Name="txtUsername" Style="{StaticResource EditTextBox}"/>
+                            <TextBlock x:Name="lblUsernameError" Style="{StaticResource ErrorText}"/>
+
+                            <TextBlock Text="Тип пользователя" Style="{StaticResource EditLabel}"/>
+                            <ComboBox x:Name="cmbUserType" Style="{StaticResource EditComboBox}">
+                                <ComboBoxItem Content="Соискатель"/>
+                                <ComboBoxItem Content="Работодатель"/>
+                                <ComboBoxItem Content="Администратор"/>
+                            </ComboBox>
+
+                            <TextBlock Text="Компания" Style="{StaticResource EditLabel}"/>
+                            <TextBox x:Name="txtCompany" Style="{StaticResource EditTextBox}"/>
+
+                            <TextBlock Text="Контактный телефон" Style="{StaticResource EditLabel}"/>
+                            <TextBox x:Name="txtPhone" Style="{StaticResource EditTextBox}"/>
+                            <TextBlock x:Name="lblPhoneError" Style="{StaticResource ErrorText}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                        <Button Content="Сохранить" Style="{StaticResource EditButton}" Click="SaveButton_Click"/>
+                        <Button Content="Отмена" Style="{StaticResource EditButton}" Click="CancelButton_Click"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </ScrollViewer>
+    </Grid>
+</Page>
