@@ -152,7 +152,6 @@ namespace JobNest
                 isValid = false;
             }
 
-            // Дополнительная проверка фамилии
             if (!string.IsNullOrWhiteSpace(txtLastName.Text) && ContainsNumbers(txtLastName.Text))
             {
                 SetError(txtLastName, "Фамилия не должна содержать цифры");
