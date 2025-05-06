@@ -218,7 +218,31 @@
                             </StackPanel>
                         </Border>
                     </TabItem>
-
+                    <TabItem Header="Регионы" Style="{StaticResource AdminTabItem}">
+                        <Border Style="{StaticResource AdminSection}">
+                            <StackPanel>
+                                <TextBlock Text="Администрирование регионов" Style="{StaticResource AdminTitle}"/>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                    <TextBlock Text="Поиск" Style="{StaticResource AdminTitle}" Margin="0,5,10,0"/>
+                                    <TextBox x:Name="RegionSearchTextBox" Style="{StaticResource SearchTextBox}" 
+                                            Tag="Поиск по названию региона" Width="300" Height="40"/>
+                                    <Button x:Name="SearchRegionButton" Style="{StaticResource SearchButton}" 
+                                         Click="SearchRegionButton_Click"/>
+                                    <Button Content="Обновить" Style="{StaticResource AdminButton}" Click="RefreshRegions_Click"/>
+                                    <Button Content="Добавить" Style="{StaticResource AdminSuccessButton}" Click="AddRegion_Click"/>
+                                    <Button Content="Удалить" Style="{StaticResource AdminDangerButton}" Click="DeleteRegion_Click"/>
+                                </StackPanel>
+                                <DataGrid x:Name="RegionsGrid" Style="{StaticResource AdminDataGrid}" 
+                                        SelectionChanged="RegionsGrid_SelectionChanged" AutoGenerateColumns="False">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="ID" Binding="{Binding regionid}" Width="Auto"/>
+                                        <DataGridTextColumn Header="Название региона" Binding="{Binding regionname}" Width="*"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                            </StackPanel>
+                        </Border>
+                    </TabItem>
+                    
                     <TabItem Header="Резюме" Style="{StaticResource AdminTabItem}">
                         <Border Style="{StaticResource AdminSection}">
                             <StackPanel>
